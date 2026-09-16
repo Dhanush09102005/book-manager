@@ -66,3 +66,6 @@ class SqliteBookRepository(BookRepository):
             (like, like),
         ).fetchall()
         return [self._row_to_book(r) for r in rows]
+
+    def close(self) -> None:
+        self._conn.close()

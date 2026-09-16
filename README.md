@@ -36,6 +36,11 @@ The business tier depends only on `BookRepository`. Production uses
 `SqliteBookRepository`; tests can use `InMemoryBookRepository` without changing
 business logic.
 
+The repository interface keeps database details out of `BookService`. This lets
+the same business logic run against SQLite in production and an in-memory
+repository in tests, proving that the data source can be swapped without changing
+validation or orchestration code.
+
 ## Structure
 
 ```text

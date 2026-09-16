@@ -52,9 +52,11 @@ if __name__ == "__main__":
     # 2. SQLite repository (temp file, cleaned up afterwards)
     fd, path = tempfile.mkstemp(suffix=".db")
     os.close(fd)
+    sqlite_repo = SqliteBookRepository(path)
     try:
-        run_scenario(SqliteBookRepository(path), "SqliteBookRepository")
+        run_scenario(sqlite_repo, "SqliteBookRepository")
     finally:
+        sqlite_repo.close()
         os.remove(path)
 
     print("\nSame BookService code, two different data sources, identical behavior.")
